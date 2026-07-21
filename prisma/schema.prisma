@@ -1,0 +1,34 @@
+// Prisma schema — 교육용 로고송 스튜디오
+// 트랙(생성물) 메타데이터. 학생 PII는 수집하지 않고 표시용 이름만 저장.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Track {
+  id            String   @id @default(cuid())
+  studentName   String? // 로그인 대신 표시용 이름 (PII 최소화)
+  classCode     String? // 선택: 반 구분용 짧은 코드 (예: "3반")
+  title         String?
+  kind          String // 'jingle' | 'bgm'
+  providerId    String
+  mode          String // 'api' | 'link-out' | 'mock'
+  providerJobId String?
+  status        String // queued | running | ready | failed | needs_manual_import
+  storeName     String?
+  category      String?
+  vibe          String?
+  prompt        String
+  lyrics        String?
+  durationSec   Int?
+  fileUrl       String?
+  mimeType      String?
+  error         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

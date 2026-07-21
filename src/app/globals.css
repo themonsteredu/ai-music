@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+body {
+  font-family: ui-sans-serif, system-ui, "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", sans-serif;
+}
+
+/* 화면에서만 보이고 인쇄에서 숨김 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-page {
+    margin: 0;
+    padding: 0;
+  }
+  .print-box {
+    border: 1.5px solid #000 !important;
+  }
+}
