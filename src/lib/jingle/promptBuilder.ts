@@ -13,7 +13,6 @@ export type Lang = 'ko' | 'en';
 export interface VirtualStore {
   storeName: string;
   category: string; // 업종
-  target?: string; // 손님
   vibe: string; // 분위기
   genre?: string; // 장르
   tempo?: Tempo;
@@ -109,7 +108,6 @@ export function buildJinglePrompt(store: VirtualStore): BuiltPrompt {
       ? [
           `"${store.storeName}"(${store.category}) 가게의 ${lengthSec}초짜리 ${genre} 로고송을 만들어 주세요.`,
           `분위기는 ${store.vibe}, ${TEMPO_KO[tempo]} 느낌.`,
-          store.target ? `주 손님은 ${store.target}.` : '',
           `후렴에서 가게 이름 "${hook}"를 또렷하게 노래로 반복해 주세요.`,
           featureLine,
           '깔끔하게 끝나는 기억하기 쉬운 멜로디로. 한국어 보컬.',
@@ -119,7 +117,6 @@ export function buildJinglePrompt(store: VirtualStore): BuiltPrompt {
       : [
           `Create a ${lengthSec}-second ${genre} logo jingle for a store called "${store.storeName}" (${store.category}).`,
           `Mood: ${store.vibe}, ${TEMPO_EN[tempo]}.`,
-          store.target ? `Main customers: ${store.target}.` : '',
           `Clearly sing the store name "${hook}" as a repeated, catchy chorus hook.`,
           featureLine,
           'Memorable, radio-ready, ends on a resolved note. Vocals in English.',

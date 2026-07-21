@@ -4,7 +4,6 @@ import type { MusicKind } from '@/lib/providers/types';
 import {
   CATEGORY_OPTIONS,
   GENRE_OPTIONS,
-  TARGET_OPTIONS,
   TEMPO_OPTIONS,
   VIBE_OPTIONS,
 } from '@/lib/jingle/presets';
@@ -30,7 +29,37 @@ function Labeled({
       <label className="block text-sm font-semibold text-stone-700">
         {label} {hint && <span className="font-normal text-stone-400">· {hint}</span>}
       </label>
-      <div className="mt-1">{children}</div>
+      <div className="mt-2">{children}</div>
+    </div>
+  );
+}
+
+/** 여러 개 중 하나를 토글로 선택 */
+function ToggleGroup<T extends string>({
+  options,
+  value,
+  onSelect,
+}: {
+  options: { value: T; label: string }[];
+  value: T | undefined;
+  onSelect: (v: T) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {options.map((o) => (
+        <button
+          key={o.value}
+          type="button"
+          onClick={() => onSelect(o.value)}
+          className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+            value === o.value
+              ? 'border-amber-500 bg-amber-100 text-amber-800'
+              : 'border-stone-200 bg-white text-stone-500 hover:bg-stone-50'
+          }`}
+        >
+          {o.label}
+        </button>
+      ))}
     </div>
   );
 }
@@ -39,6 +68,9 @@ const inputCls =
   'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-800 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200';
 
 export default function StoreBuilder({ store, kind, onChange, onKindChange }: Props) {
+  const vibeOpts = VIBE_OPTIONS.map((v) => ({ value: v, label: v }));
+  const genreOpts = GENRE_OPTIONS.map((g) => ({ value: g, label: g }));
+
   return (
     <div className="space-y-5">
       {/* 종류 토글 */}
@@ -64,6 +96,7 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
         ))}
       </div>
 
+      {/* 이름 · 업종 (직접 입력) */}
       <div className="grid gap-4 sm:grid-cols-2">
         <Labeled label="가게 이름" hint="기억에 남는 이름">
           <input
@@ -74,7 +107,7 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
           />
         </Labeled>
 
-        <Labeled label="업종 (무엇을 파나요)">
+        <Labeled label="무엇을 파는 가게예요?">
           <input
             className={inputCls}
             list="cat-list"
@@ -88,103 +121,58 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
             ))}
           </datalist>
         </Labeled>
-
-        <Labeled label="주 손님">
-          <input
-            className={inputCls}
-            list="target-list"
-            value={store.target ?? ''}
-            placeholder="예: 학생"
-            onChange={(e) => onChange({ target: e.target.value })}
-          />
-          <datalist id="target-list">
-            {TARGET_OPTIONS.map((c) => (
-              <option key={c} value={c} />
-            ))}
-          </datalist>
-        </Labeled>
-
-        <Labeled label="분위기">
-          <input
-            className={inputCls}
-            list="vibe-list"
-            value={store.vibe}
-            placeholder="예: 따뜻하고 정겨운"
-            onChange={(e) => onChange({ vibe: e.target.value })}
-          />
-          <datalist id="vibe-list">
-            {VIBE_OPTIONS.map((c) => (
-              <option key={c} value={c} />
-            ))}
-          </datalist>
-        </Labeled>
-
-        <Labeled label="장르">
-          <select
-            className={inputCls}
-            value={store.genre ?? ''}
-            onChange={(e) => onChange({ genre: e.target.value })}
-          >
-            <option value="">골라주세요</option>
-            {GENRE_OPTIONS.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </Labeled>
-
-        <Labeled label="빠르기">
-          <div className="flex gap-2">
-            {TEMPO_OPTIONS.map((t) => (
-              <button
-                key={t.value}
-                type="button"
-                onClick={() => onChange({ tempo: t.value })}
-                className={`flex-1 rounded-lg border px-2 py-2 text-sm font-medium ${
-                  store.tempo === t.value
-                    ? 'border-amber-500 bg-amber-100 text-amber-800'
-                    : 'border-stone-200 bg-white text-stone-500'
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-        </Labeled>
       </div>
 
-      <Labeled label="우리 가게만의 특징" hint="활동지에 적은 내용을 옮겨 적어요">
+      {/* 분위기 · 장르 · 빠르기 (토글 선택) */}
+      <Labeled label="분위기" hint="하나 골라요">
+        <ToggleGroup
+          options={vibeOpts}
+          value={store.vibe || undefined}
+          onSelect={(v) => onChange({ vibe: v })}
+        />
+      </Labeled>
+
+      <Labeled label="장르" hint="하나 골라요">
+        <ToggleGroup
+          options={genreOpts}
+          value={store.genre || undefined}
+          onSelect={(v) => onChange({ genre: v })}
+        />
+      </Labeled>
+
+      <Labeled label="빠르기">
+        <ToggleGroup
+          options={TEMPO_OPTIONS}
+          value={store.tempo}
+          onSelect={(v) => onChange({ tempo: v })}
+        />
+      </Labeled>
+
+      {/* 특징 (직접 입력) */}
+      <Labeled label="우리 가게만의 자랑거리" hint="활동지에 적은 내용을 옮겨 적어요">
         <textarea
           className={`${inputCls} min-h-20`}
           value={store.features ?? ''}
-          placeholder="예: 매일 갓 만든 떡볶이, 학생 할인, 귀여운 캐릭터 컵"
+          placeholder="예: 매일 갓 만든 떡볶이, 귀여운 캐릭터 컵, 친절한 사장님"
           onChange={(e) => onChange({ features: e.target.value })}
         />
       </Labeled>
 
-      <div className="flex items-center gap-3">
-        <Labeled label="언어">
-          <select
-            className={inputCls}
+      {/* 언어 (토글) · 길이는 15초 고정 */}
+      <div className="flex flex-wrap items-end gap-6">
+        <Labeled label="노래 언어">
+          <ToggleGroup
+            options={[
+              { value: 'ko', label: '한국어' },
+              { value: 'en', label: '영어' },
+            ]}
             value={store.language ?? 'ko'}
-            onChange={(e) => onChange({ language: e.target.value as 'ko' | 'en' })}
-          >
-            <option value="ko">한국어 보컬</option>
-            <option value="en">영어 보컬</option>
-          </select>
-        </Labeled>
-        <Labeled label={`길이: ${store.lengthSec ?? (kind === 'bgm' ? 60 : 15)}초`}>
-          <input
-            type="range"
-            min={kind === 'bgm' ? 30 : 10}
-            max={kind === 'bgm' ? 120 : 30}
-            step={5}
-            value={store.lengthSec ?? (kind === 'bgm' ? 60 : 15)}
-            onChange={(e) => onChange({ lengthSec: Number(e.target.value) })}
-            className="w-40 accent-amber-600"
+            onSelect={(v) => onChange({ language: v })}
           />
         </Labeled>
+        <div className="text-sm text-stone-500">
+          길이 <span className="font-semibold text-stone-700">15초</span> (로고송에 딱 좋아요)
+        </div>
       </div>
     </div>
   );

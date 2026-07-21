@@ -28,7 +28,7 @@ function Field({ f }: { f: WorksheetField }) {
 export default function WorksheetPrint() {
   const w = STORE_WORKSHEET;
   return (
-    <div className="print-page space-y-6">
+    <div className="print-page mx-auto max-w-3xl space-y-6 px-6 py-8">
       <div className="no-print flex flex-wrap items-center gap-3 rounded-2xl bg-amber-100 p-4">
         <p className="flex-1 text-sm text-stone-700">
           아래 활동지를 <b>인쇄</b>하거나 <b>PDF로 저장</b>해서 학생에게

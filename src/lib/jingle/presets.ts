@@ -39,12 +39,3 @@ export const TEMPO_OPTIONS: { value: Tempo; label: string }[] = [
   { value: 'medium', label: '보통' },
   { value: 'upbeat', label: '경쾌하게' },
 ];
-
-export const TARGET_OPTIONS = [
-  '학생',
-  '가족',
-  '직장인',
-  '어린이',
-  '어르신',
-  '동네 주민',
-];

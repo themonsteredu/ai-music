@@ -23,29 +23,28 @@ export interface WorksheetDef {
 }
 
 export const STORE_WORKSHEET: WorksheetDef = {
-  title: '나만의 가게 로고송 만들기 — 활동지',
+  title: '나만의 가게 로고송 만들기 🎵',
   intro:
-    '내가 운영하고 싶은 “가상의 가게”를 상상해 보세요. 아래 칸을 손으로 채운 뒤, 그 내용을 앱에 입력해 로고송을 만들어 봅니다.',
+    '내가 사장님이라면 어떤 가게를 열고 싶나요? 아래를 채우면서 나만의 가게를 상상해 봐요. 다 적으면, 적은 내용으로 우리 가게 로고송을 만들 거예요!',
   fields: [
-    { key: 'storeName', label: '가게 이름', type: 'line', hint: '부르기 쉽고 기억에 남는 이름' },
-    { key: 'category', label: '무엇을 파는 가게인가요? (업종)', type: 'line' },
-    { key: 'target', label: '주로 어떤 손님이 오나요?', type: 'line' },
-    { key: 'vibe', label: '가게의 분위기는 어떤가요?', type: 'line', hint: '예: 따뜻한, 신나는, 차분한' },
+    { key: 'storeName', label: '① 우리 가게 이름은?', type: 'line', hint: '입에 착 붙는 이름이면 더 좋아요' },
+    { key: 'category', label: '② 무엇을 파는 가게예요?', type: 'line', hint: '예: 떡볶이, 책, 꽃, 아이스크림…' },
+    { key: 'vibe', label: '③ 우리 가게는 어떤 느낌?', type: 'line', hint: '예: 따뜻한, 신나는, 아늑한' },
     {
       key: 'concept',
-      label: '우리 가게를 소개해 주세요 (컨셉)',
+      label: '④ 우리 가게를 자랑해 주세요!',
       type: 'box',
-      hint: '어떤 가게인지, 왜 이 가게를 만들고 싶은지 자유롭게',
+      hint: '어떤 가게인지, 왜 오고 싶은지 마음껏 소개해요',
     },
     {
       key: 'features',
-      label: '우리 가게만의 특징 3가지',
+      label: '⑤ 우리 가게만의 자랑거리 3가지',
       type: 'lines',
       lines: 3,
-      hint: '다른 가게와 다른 점, 자랑하고 싶은 점',
+      hint: '다른 가게엔 없는, 우리만의 특별한 점',
     },
   ],
-  promptDraftLabel: '위 내용을 모아서 로고송 프롬프트 초안 적어보기',
+  promptDraftLabel: '⑥ 로고송에 꼭 넣고 싶은 말을 한 줄로!',
   promptDraftHint:
-    '가게 이름 + 분위기 + 장르 + 빠르기를 한 문장으로 이어 보세요. (앱이 더 좋은 프롬프트로 다듬는 법을 알려줄 거예요!)',
+    '가게 이름을 넣어서, 어떤 느낌의 노래였으면 좋겠는지 자유롭게 적어 봐요. (앱이 멋진 프롬프트로 다듬는 법을 알려줄 거예요!)',
 };

@@ -8,12 +8,12 @@ import GenerationProgress from '@/components/GenerationProgress';
 import LaunchOutPanel from '@/components/LaunchOutPanel';
 import { buildPrompt, type VirtualStore } from '@/lib/jingle/promptBuilder';
 import { startGeneration, type TrackDTO } from '@/lib/api-client';
+import { usePaidEnabled } from '@/lib/usePaidEnabled';
 import type { MusicKind } from '@/lib/providers/types';
 
 const EMPTY_STORE: VirtualStore = {
   storeName: '',
   category: '',
-  target: '',
   vibe: '',
   genre: '',
   tempo: 'upbeat',
@@ -50,7 +50,9 @@ export default function CreatePage() {
   const [store, setStore] = useState<VirtualStore>(EMPTY_STORE);
   const [dirtyPrompt, setDirtyPrompt] = useState(false);
   const [editedPrompt, setEditedPrompt] = useState('');
-  const [providerId, setProviderId] = useState<string | null>(null);
+  // 기본은 무료 Suno. 유료(ElevenLabs)는 설정에서 켰을 때만 노출.
+  const [providerId, setProviderId] = useState<string | null>('linkout-suno');
+  const [paidEnabled] = usePaidEnabled();
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -95,11 +97,11 @@ export default function CreatePage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6 px-6 py-10">
       <div>
-        <h1 className="text-2xl font-extrabold text-stone-800">🎤 로고송 만들기</h1>
-        <p className="mt-1 text-stone-600">
-          활동지에 적은 내 가상 가게를 앱에 옮겨 적고, 로고송을 만들어 봐요.
+        <h1 className="text-2xl font-extrabold text-[#172033]">로고송 만들기</h1>
+        <p className="mt-1 text-[#5b6270]">
+          내 가상 가게를 정하면, 우리 가게만의 로고송을 만들어 봐요.
         </p>
       </div>
 
@@ -143,7 +145,12 @@ export default function CreatePage() {
       </Section>
 
       <Section n={4} title="어떻게 만들까요?">
-        <ProviderSelect kind={kind} value={providerId} onChange={setProviderId} />
+        <ProviderSelect
+          kind={kind}
+          value={providerId}
+          onChange={setProviderId}
+          showPaid={paidEnabled}
+        />
       </Section>
 
       <div className="sticky bottom-4 z-10">
