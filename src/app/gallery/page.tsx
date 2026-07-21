@@ -6,7 +6,7 @@ export default function GalleryPage() {
   return (
     <div className="mx-auto max-w-[1280px] space-y-6 px-6 py-10 lg:px-10">
       <div>
-        <h1 className="text-2xl font-extrabold text-[#172033]">반 갤러리</h1>
+        <h1 className="font-title text-2xl font-extrabold text-[#172033]">반 갤러리</h1>
         <p className="mt-1 text-[#5b6270]">
           우리 반이 만든 로고송을 모아 함께 들어봐요.
         </p>

@@ -44,7 +44,7 @@ export default function WorksheetPrint() {
 
       <article className="mx-auto max-w-3xl rounded-2xl border border-stone-300 bg-white p-8">
         <header className="border-b-2 border-stone-800 pb-3">
-          <h1 className="text-2xl font-extrabold text-stone-900">{w.title}</h1>
+          <h1 className="font-title text-2xl font-extrabold text-stone-900">{w.title}</h1>
           <p className="mt-2 text-sm text-stone-600">{w.intro}</p>
           <div className="mt-3 flex gap-6 text-sm text-stone-700">
             <span>이름: ____________________</span>

@@ -12,10 +12,16 @@
 body {
   background: var(--bg);
   color: var(--title);
-  font-family: var(--font-dohyeon), "Do Hyeon", "Pretendard Variable", Pretendard,
-    SUIT, ui-sans-serif, system-ui, "Apple SD Gothic Neo", "Malgun Gothic",
-    "Noto Sans KR", sans-serif;
+  /* 본문은 읽기 편한 고딕 */
+  font-family: "Pretendard Variable", Pretendard, SUIT, ui-sans-serif, system-ui,
+    "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 제목(주제)에만 도현체 */
+.font-title {
+  font-family: var(--font-dohyeon), "Do Hyeon", "Pretendard Variable", Pretendard,
+    sans-serif;
 }
 
 @media print {

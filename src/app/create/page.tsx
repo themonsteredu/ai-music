@@ -32,7 +32,7 @@ function Section({
 }) {
   return (
     <section className="rounded-2xl border border-amber-200 bg-white p-5 shadow-sm">
-      <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-800">
+      <h2 className="font-title mb-4 flex items-center gap-2 text-lg font-bold text-stone-800">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-500 text-sm text-white">
           {n}
         </span>
@@ -99,7 +99,7 @@ export default function CreatePage() {
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-6 py-10">
       <div>
-        <h1 className="text-2xl font-extrabold text-[#172033]">로고송 만들기</h1>
+        <h1 className="font-title text-2xl font-extrabold text-[#172033]">로고송 만들기</h1>
         <p className="mt-1 text-[#5b6270]">
           내 가상 가게를 정하면, 우리 가게만의 로고송을 만들어 봐요.
         </p>

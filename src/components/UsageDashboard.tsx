@@ -30,7 +30,7 @@ export default function UsageDashboard() {
     <div className="space-y-6">
       {/* 요금 안내 + 예시 */}
       <section className="rounded-2xl border border-amber-200 bg-white p-6">
-        <h2 className="text-lg font-bold text-stone-800">💰 API 요금 안내</h2>
+        <h2 className="font-title text-lg font-bold text-stone-800">💰 API 요금 안내</h2>
         <p className="mt-2 text-sm text-stone-600">
           <b>체험용(목업)</b>과 <b>무료 웹툴 링크</b>는 <b>요금이 없습니다(0원)</b>. 앱
           안에서 바로 생성하는 <b>ElevenLabs</b>만 요금이 발생해요.
@@ -64,7 +64,7 @@ export default function UsageDashboard() {
       {/* 날짜별 요금 기록 */}
       <section className="rounded-2xl border border-amber-200 bg-white p-6">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-bold text-stone-800">📅 날짜별 요금 기록</h2>
+          <h2 className="font-title text-lg font-bold text-stone-800">📅 날짜별 요금 기록</h2>
           <button
             onClick={() => setReloadKey((k) => k + 1)}
             className="ml-auto rounded-full bg-amber-100 px-3 py-1.5 text-sm font-semibold text-amber-800 hover:bg-amber-200"

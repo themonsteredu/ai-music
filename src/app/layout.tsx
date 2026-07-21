@@ -31,7 +31,7 @@ function Logo() {
         <circle cx="8.4" cy="17.4" r="3.1" fill="#766CC2" />
         <circle cx="18" cy="16.4" r="3.1" fill="#F1643A" />
       </svg>
-      <span className="whitespace-nowrap text-base font-bold tracking-tight text-[#172033] sm:text-[17px]">
+      <span className="font-title whitespace-nowrap text-base font-bold tracking-tight text-[#172033] sm:text-[17px]">
         로고송 스튜디오
       </span>
     </span>

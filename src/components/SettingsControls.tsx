@@ -9,7 +9,7 @@ export default function SettingsControls() {
     <div className="space-y-6">
       {/* 유료 기능 토글 */}
       <section className="rounded-2xl border border-[#E8E4DE] bg-white p-6">
-        <h2 className="text-lg font-bold text-[#172033]">유료 기능 (ElevenLabs)</h2>
+        <h2 className="font-title text-lg font-bold text-[#172033]">유료 기능 (ElevenLabs)</h2>
         <p className="mt-2 text-sm text-[#5b6270]">
           평소에는 <b>무료 Suno</b>로 만들어요. Suno 계정 오류 등으로 만들기가 안 될
           때, 아래를 켜면 <b>앱 안에서 바로 생성되는 유료 기능(ElevenLabs)</b>이 만들기
@@ -45,7 +45,7 @@ export default function SettingsControls() {
 
       {/* 활동지 (설정 안에서만 접근) */}
       <section className="rounded-2xl border border-[#E8E4DE] bg-white p-6">
-        <h2 className="text-lg font-bold text-[#172033]">수업 활동지</h2>
+        <h2 className="font-title text-lg font-bold text-[#172033]">수업 활동지</h2>
         <p className="mt-2 text-sm text-[#5b6270]">
           학생이 가상 가게를 손으로 정리하는 인쇄용 활동지예요. 열어서 인쇄하거나 PDF로
           저장해 나눠줄 수 있어요.

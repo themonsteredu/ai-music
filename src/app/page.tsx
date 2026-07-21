@@ -9,7 +9,7 @@ export default function Home() {
         <p className="text-sm font-semibold tracking-[0.2em] text-[#766CC2]">
           AI LOGO SONG MAKER
         </p>
-        <h1 className="mt-6 text-[2.75rem] font-extrabold leading-[1.15] tracking-tight text-[#172033] sm:text-[3.25rem]">
+        <h1 className="font-title mt-6 text-[2.75rem] font-extrabold leading-[1.15] tracking-tight text-[#172033] sm:text-[3.25rem]">
           우리 가게의 이야기를
           <br />
           <span className="text-[#F1643A]">노래로</span> 만들어요
