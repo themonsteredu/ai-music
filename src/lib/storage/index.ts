@@ -1,6 +1,7 @@
 import 'server-only';
 import { env } from '@/lib/env';
 import { LocalStorage } from './local';
+import { InlineStorage } from './inline';
 
 /** 생성된 오디오 파일 저장 추상화. 드라이버를 바꿔 로컬/클라우드 전환. */
 export interface AudioStorage {
@@ -13,6 +14,10 @@ let instance: AudioStorage | null = null;
 
 export function getStorage(): AudioStorage {
   if (instance) return instance;
+  if (env.storageDriver === 'inline') {
+    instance = new InlineStorage();
+    return instance;
+  }
   if (env.storageDriver === 'blob') {
     // 배포용: @vercel/blob 설치 후 연결. v1 은 로컬 드라이버를 기본으로 둔다.
     throw new Error(

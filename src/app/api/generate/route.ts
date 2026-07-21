@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import { prisma, dbReady } from '@/lib/db';
 import { getProvider } from '@/lib/providers';
 import { advanceTrack } from '@/lib/generation';
 import { generateSchema } from '@/lib/validation';
@@ -7,6 +7,7 @@ import { ok, fail } from '@/lib/http';
 export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
+  await dbReady;
   let body: unknown;
   try {
     body = await req.json();

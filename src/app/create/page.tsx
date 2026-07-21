@@ -177,7 +177,7 @@ export default function CreatePage() {
               prompt={finalPrompt}
             />
           ) : (
-            <GenerationProgress key={track.id} trackId={track.id} />
+            <GenerationProgress key={track.id} track={track} />
           )}
         </Section>
       )}

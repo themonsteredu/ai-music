@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import { prisma, dbReady } from '@/lib/db';
 import { getStorage } from '@/lib/storage';
 import { ok, fail } from '@/lib/http';
 
@@ -8,6 +8,7 @@ export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  await dbReady;
   const { id } = await params;
   const track = await prisma.track.findUnique({ where: { id } });
   if (!track) return fail('트랙을 찾을 수 없습니다.', 404);
@@ -18,6 +19,7 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  await dbReady;
   const { id } = await params;
   const track = await prisma.track.findUnique({ where: { id } });
   if (!track) return fail('트랙을 찾을 수 없습니다.', 404);

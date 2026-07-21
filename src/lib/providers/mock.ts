@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { isServerless } from '@/lib/env';
 import type {
   GenerateRequest,
   GenerationJob,
@@ -33,7 +34,12 @@ export class MockProvider implements MusicProvider {
 
   async generate(_req: GenerateRequest): Promise<GenerationJob> {
     const jobId = `mock-${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
-    return { providerJobId: jobId, status: 'queued' };
+    // 서버리스(데모)에서는 인스턴스 간 상태 공유 없이 한 번에 끝나도록 즉시 완료.
+    // 로컬에서는 queued→running→ready 진행을 교육용으로 시뮬레이션.
+    return {
+      providerJobId: jobId,
+      status: isServerless ? 'succeeded' : 'queued',
+    };
   }
 
   async pollStatus(jobId: string): Promise<GenerationJob> {

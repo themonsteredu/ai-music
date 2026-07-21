@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePollTrack } from '@/lib/polling';
+import type { TrackDTO } from '@/lib/api-client';
 
 const STATUS_LABEL: Record<string, string> = {
   queued: '대기 중…',
@@ -10,13 +11,16 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 interface Props {
-  trackId: string;
-  onDone?: () => void;
+  /** /generate 가 돌려준 초기 트랙 (서버리스에서는 이미 ready 일 수 있음) */
+  track: TrackDTO;
 }
 
-export default function GenerationProgress({ trackId }: Props) {
-  const track = usePollTrack(trackId);
-  const status = track?.status ?? 'queued';
+export default function GenerationProgress({ track: initial }: Props) {
+  const terminal = ['ready', 'failed'].includes(initial.status);
+  // 이미 끝났으면 폴링하지 않는다 (서버리스 즉시완료 대응).
+  const polled = usePollTrack(terminal ? null : initial.id);
+  const track = polled ?? initial;
+  const status = track.status;
   const busy = status === 'queued' || status === 'running';
 
   return (
@@ -36,11 +40,11 @@ export default function GenerationProgress({ trackId }: Props) {
         </div>
       )}
 
-      {status === 'failed' && track?.error && (
+      {status === 'failed' && track.error && (
         <p className="mt-2 text-sm text-rose-600">{track.error}</p>
       )}
 
-      {status === 'ready' && track?.fileUrl && (
+      {status === 'ready' && track.fileUrl && (
         <div className="mt-3 space-y-3">
           <audio controls src={track.fileUrl} className="w-full" />
           <div className="flex gap-2">
