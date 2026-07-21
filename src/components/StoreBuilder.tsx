@@ -1,5 +1,5 @@
 'use client';
-import type { VirtualStore } from '@/lib/jingle/promptBuilder';
+import { suggestJingleLyrics, type VirtualStore } from '@/lib/jingle/promptBuilder';
 import type { MusicKind } from '@/lib/providers/types';
 import {
   CATEGORY_OPTIONS,
@@ -157,6 +157,25 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
           onChange={(e) => onChange({ features: e.target.value })}
         />
       </Labeled>
+
+      {/* 가사 직접 쓰기 (로고송일 때만) */}
+      {kind === 'jingle' && (
+        <Labeled label="우리 로고송 가사 (직접 써봐요)" hint="가게 이름을 넣어 신나게!">
+          <textarea
+            className={`${inputCls} min-h-28 whitespace-pre-line`}
+            value={store.lyrics ?? ''}
+            placeholder={'예)\n[후렴]\n달빛 분식, 달빛 분식\n달빛 분식 여기 있어요!'}
+            onChange={(e) => onChange({ lyrics: e.target.value })}
+          />
+          <button
+            type="button"
+            onClick={() => onChange({ lyrics: suggestJingleLyrics(store) })}
+            className="mt-2 rounded-full bg-[#F3EDE4] px-3 py-1.5 text-xs font-semibold text-[#172033] hover:bg-[#E8E4DE]"
+          >
+            ✨ 예시로 채우기 (그다음 자유롭게 고쳐요)
+          </button>
+        </Labeled>
+      )}
 
       {/* 언어 (토글) · 길이는 15초 고정 */}
       <div className="flex flex-wrap items-end gap-6">

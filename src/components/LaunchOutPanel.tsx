@@ -69,21 +69,13 @@ export default function LaunchOutPanel({ track, launchUrl, prompt, lyrics }: Pro
 
   return (
     <div className="space-y-4">
-      {/* Suno 사용법 안내 */}
-      <div className="rounded-xl border border-[#766CC2]/30 bg-[#766CC2]/5 p-4 text-sm text-[#172033]">
-        <p className="font-bold text-[#766CC2]">Suno에서 가사 칸을 못 찾겠다면?</p>
-        <ul className="mt-2 space-y-1.5 text-[#3d4453]">
-          <li>
-            <b>· 간단 모드(추천)</b> — Suno 만들기 화면의 <b>“노래 설명(Song
-            description)”</b> 한 칸에 아래 <b>[노래 설명]</b>만 붙여넣으면 가사·멜로디를
-            <b> 자동으로</b> 만들어줘요. 가사 칸을 따로 찾을 필요 없어요!
-          </li>
-          <li>
-            <b>· 커스텀 모드</b> — 가사를 직접 넣고 싶으면 <b>Custom</b>을 켜고,{' '}
-            <b>Lyrics</b> 칸에 아래 <b>[가사]</b>, <b>Styles</b> 칸에 <b>[노래 설명]</b>을
-            넣어요.
-          </li>
-        </ul>
+      {/* Suno로 만드는 순서 요약 */}
+      <div className="rounded-xl border border-[#766CC2]/30 bg-[#766CC2]/5 p-4 text-sm">
+        <p className="font-bold text-[#766CC2]">Suno로 만드는 순서</p>
+        <p className="mt-1 text-[#3d4453]">
+          내가 쓴 <b>[가사]</b>와 <b>[노래 설명]</b>을 복사해서 Suno에 넣으면 돼요.
+          아래 순서대로 따라 해요!
+        </p>
       </div>
 
       <div className="space-y-4 rounded-2xl border border-[#E8E4DE] bg-white p-5">
@@ -97,7 +89,7 @@ export default function LaunchOutPanel({ track, launchUrl, prompt, lyrics }: Pro
                     노래 설명
                   </span>
                   <span className="text-xs text-[#8a8f99]">
-                    (간단 모드면 이것만! / 커스텀은 Styles 칸)
+                    (커스텀 → Styles 칸 / 간단 모드면 이것만)
                   </span>
                 </div>
                 <div className="rounded-lg bg-[#F3EDE4] p-3 text-[#172033]">{prompt}</div>
@@ -110,9 +102,7 @@ export default function LaunchOutPanel({ track, launchUrl, prompt, lyrics }: Pro
                     <span className="rounded-md bg-[#766CC2]/10 px-2 py-0.5 text-xs font-bold text-[#766CC2]">
                       가사
                     </span>
-                    <span className="text-xs text-[#8a8f99]">
-                      (직접 넣고 싶을 때만 · 커스텀 Lyrics 칸)
-                    </span>
+                    <span className="text-xs text-[#8a8f99]">(커스텀 → Lyrics 칸)</span>
                   </div>
                   <div className="rounded-lg bg-[#F3EDE4] p-3 whitespace-pre-line text-[#172033]">
                     {lyrics}
@@ -124,7 +114,7 @@ export default function LaunchOutPanel({ track, launchUrl, prompt, lyrics }: Pro
           </li>
 
           <li>
-            <b>2.</b> 무료 웹툴을 열어 붙여넣고 음악을 만들어요.
+            <b>2.</b> ‘무료 웹툴 열기’로 <b>Suno에 접속</b>해요. (처음이면 무료 로그인)
             {launchUrl && (
               <div className="mt-2">
                 <a
@@ -140,7 +130,29 @@ export default function LaunchOutPanel({ track, launchUrl, prompt, lyrics }: Pro
           </li>
 
           <li>
-            <b>3.</b> 만든 음악 파일을 내려받아 여기로 올려요.
+            <b>3.</b> Suno 화면에서 <b>순서대로</b> 넣어요:
+            <ol className="mt-1.5 ml-1 list-decimal space-y-1 pl-4 text-[#3d4453]">
+              <li>
+                <b>Custom(커스텀)</b> 켜기
+              </li>
+              <li>
+                <b>Lyrics(가사)</b> 칸에 <b>[가사]</b> 붙여넣기
+              </li>
+              <li>
+                <b>Styles</b>(Style of Music) 칸에 <b>[노래 설명]</b> 붙여넣기
+              </li>
+              <li>
+                <b>Create(만들기)</b> 누르고 잠깐 기다리기
+              </li>
+            </ol>
+            <p className="mt-1.5 text-xs text-[#8a8f99]">
+              💡 가사 없이 빠르게 만들고 싶으면 Custom을 끄고 [노래 설명]만 넣어도 자동으로
+              만들어져요.
+            </p>
+          </li>
+
+          <li>
+            <b>4.</b> 완성된 곡을 <b>다운로드</b>해서 아래에 올려요.
             <div className="mt-2">
               <label className="inline-block cursor-pointer rounded-full border border-[#E8E4DE] bg-white px-4 py-2 text-sm font-semibold text-[#e0562e] hover:bg-[#FAF8F4]">
                 {uploading ? '업로드 중…' : '⬆️ 결과 파일 올리기'}

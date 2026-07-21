@@ -19,6 +19,7 @@ const EMPTY_STORE: VirtualStore = {
   tempo: 'upbeat',
   language: 'ko',
   features: '',
+  lyrics: '',
 };
 
 function Section({

@@ -20,6 +20,16 @@ export interface VirtualStore {
   language?: Lang;
   hook?: string; // 후렴에 부를 문구(기본: 가게 이름)
   features?: string; // 활동지에 쓴 특징 서술(자유 텍스트)
+  lyrics?: string; // 학생이 직접 쓴 가사 (없으면 예시 후렴으로 대체)
+}
+
+/** 가사 쓰기 예시(후렴) — 학생이 시작점으로 쓰고 자유롭게 고칠 수 있다 */
+export function suggestJingleLyrics(store: VirtualStore): string {
+  const hook = (store.hook?.trim() || store.storeName || '우리 가게').trim();
+  const name = store.storeName?.trim() || '우리 가게';
+  return store.language === 'en'
+    ? `[Chorus]\n${hook}, ${hook}\nCome on down to ${name}\n${hook}, let's go!`
+    : `[후렴]\n${hook}, ${hook}\n${name} 여기 있어요\n${hook}, 함께 가요!`;
 }
 
 /** 가이드 UI가 렌더할 "구성요소별 설명" */
@@ -124,11 +134,8 @@ export function buildJinglePrompt(store: VirtualStore): BuiltPrompt {
           .filter(Boolean)
           .join(' ');
 
-  // Suno 커스텀 모드의 Lyrics 칸에 바로 넣을 수 있는 짧은 후렴 (학생이 고쳐 써도 됨)
-  const lyrics =
-    lang === 'ko'
-      ? `[후렴]\n${hook}, ${hook}\n${store.storeName} 여기 있어요\n${hook}, 함께 가요!`
-      : `[Chorus]\n${hook}, ${hook}\nCome on down to ${store.storeName}\n${hook}, let's go!`;
+  // 학생이 직접 쓴 가사를 우선 사용, 없으면 예시 후렴으로 대체
+  const lyrics = store.lyrics?.trim() || suggestJingleLyrics(store);
 
   return { prompt, lyrics, segments, kind: 'jingle' };
 }
