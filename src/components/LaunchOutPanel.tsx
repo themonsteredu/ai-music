@@ -56,14 +56,14 @@ export default function LaunchOutPanel({ track, launchUrl, prompt }: Props) {
   }
 
   return (
-    <div className="space-y-4 rounded-2xl border border-amber-200 bg-white p-5">
-      <ol className="space-y-3 text-sm text-stone-700">
+    <div className="space-y-4 rounded-2xl border border-[#E8E4DE] bg-white p-5">
+      <ol className="space-y-3 text-sm text-[#172033]">
         <li>
           <b>1.</b> 아래 프롬프트를 복사해요.
-          <div className="mt-2 rounded-lg bg-stone-100 p-3 text-stone-700">{prompt}</div>
+          <div className="mt-2 rounded-lg bg-[#F3EDE4] p-3 text-[#172033]">{prompt}</div>
           <button
             onClick={copy}
-            className="mt-2 rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-200"
+            className="mt-2 rounded-full bg-[#F3EDE4] px-4 py-2 text-sm font-semibold text-[#172033] hover:bg-[#E8E4DE]"
           >
             {copied ? '복사됨 ✓' : '📋 프롬프트 복사'}
           </button>
@@ -76,7 +76,7 @@ export default function LaunchOutPanel({ track, launchUrl, prompt }: Props) {
                 href={launchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+                className="inline-block rounded-full bg-[#F1643A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#e0562e]"
               >
                 🔗 무료 웹툴 열기
               </a>
@@ -86,7 +86,7 @@ export default function LaunchOutPanel({ track, launchUrl, prompt }: Props) {
         <li>
           <b>3.</b> 만든 음악 파일을 내려받아 여기로 올려요.
           <div className="mt-2">
-            <label className="inline-block cursor-pointer rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-semibold text-amber-700 hover:bg-amber-50">
+            <label className="inline-block cursor-pointer rounded-full border border-[#E8E4DE] bg-white px-4 py-2 text-sm font-semibold text-[#e0562e] hover:bg-[#FAF8F4]">
               {uploading ? '업로드 중…' : '⬆️ 결과 파일 올리기'}
               <input
                 type="file"

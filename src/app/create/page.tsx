@@ -31,9 +31,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-amber-200 bg-white p-5 shadow-sm">
-      <h2 className="font-title mb-4 flex items-center gap-2 text-lg font-bold text-stone-800">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-500 text-sm text-white">
+    <section className="rounded-2xl border border-[#E8E4DE] bg-white p-5 shadow-sm">
+      <h2 className="font-title mb-4 flex items-center gap-2 text-lg font-bold text-[#172033]">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F1643A] text-sm text-white">
           {n}
         </span>
         {title}
@@ -137,7 +137,7 @@ export default function CreatePage() {
         {dirtyPrompt && (
           <button
             onClick={() => setDirtyPrompt(false)}
-            className="mt-2 text-xs font-semibold text-amber-600 hover:underline"
+            className="mt-2 text-xs font-semibold text-[#F1643A] hover:underline"
           >
             ↩︎ 가이드가 만든 프롬프트로 되돌리기
           </button>
@@ -157,12 +157,12 @@ export default function CreatePage() {
         <button
           onClick={onGenerate}
           disabled={!canSubmit}
-          className="w-full rounded-2xl bg-amber-600 px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-stone-300"
+          className="w-full rounded-2xl bg-[#F1643A] px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-[#e0562e] disabled:cursor-not-allowed disabled:bg-[#E8E4DE]"
         >
           {submitting ? '준비 중…' : '🎵 로고송 만들기'}
         </button>
         {!canSubmit && !submitting && (
-          <p className="mt-2 text-center text-sm text-stone-500">
+          <p className="mt-2 text-center text-sm text-[#8a8f99]">
             가게 이름·분위기를 적고, 만드는 방법을 골라 주세요.
           </p>
         )}

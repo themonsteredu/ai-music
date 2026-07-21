@@ -35,28 +35,28 @@ export default function TrackList() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
         <input
-          className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm focus:border-amber-500 focus:outline-none"
+          className="rounded-lg border border-[#E8E4DE] bg-white px-3 py-2 text-sm focus:border-[#F1643A] focus:outline-none"
           placeholder="반으로 필터 (예: 3반)"
           value={classCode}
           onChange={(e) => setClassCode(e.target.value)}
         />
         <button
           onClick={() => setReloadKey((k) => k + 1)}
-          className="rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-200"
+          className="rounded-full bg-[#F3EDE4] px-4 py-2 text-sm font-semibold text-[#172033] hover:bg-[#E8E4DE]"
         >
           🔄 새로고침
         </button>
-        <span className="ml-auto text-sm text-stone-500">{tracks.length}개</span>
+        <span className="ml-auto text-sm text-[#8a8f99]">{tracks.length}개</span>
       </div>
 
       {loading ? (
-        <p className="py-10 text-center text-stone-400">불러오는 중…</p>
+        <p className="py-10 text-center text-[#a8aab0]">불러오는 중…</p>
       ) : tracks.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-amber-300 bg-amber-50 py-12 text-center">
-          <p className="text-stone-500">아직 만든 로고송이 없어요.</p>
+        <div className="rounded-2xl border border-dashed border-[#E8E4DE] bg-[#FAF8F4] py-12 text-center">
+          <p className="text-[#8a8f99]">아직 만든 로고송이 없어요.</p>
           <a
             href="/create"
-            className="mt-3 inline-block rounded-full bg-amber-600 px-5 py-2.5 font-bold text-white hover:bg-amber-700"
+            className="mt-3 inline-block rounded-full bg-[#F1643A] px-5 py-2.5 font-bold text-white hover:bg-[#e0562e]"
           >
             🎤 첫 로고송 만들러 가기
           </a>

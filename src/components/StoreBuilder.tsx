@@ -26,8 +26,8 @@ function Labeled({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-stone-700">
-        {label} {hint && <span className="font-normal text-stone-400">· {hint}</span>}
+      <label className="block text-sm font-semibold text-[#172033]">
+        {label} {hint && <span className="font-normal text-[#a8aab0]">· {hint}</span>}
       </label>
       <div className="mt-2">{children}</div>
     </div>
@@ -53,8 +53,8 @@ function ToggleGroup<T extends string>({
           onClick={() => onSelect(o.value)}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
             value === o.value
-              ? 'border-amber-500 bg-amber-100 text-amber-800'
-              : 'border-stone-200 bg-white text-stone-500 hover:bg-stone-50'
+              ? 'border-[#F1643A] bg-[#F3EDE4] text-[#172033]'
+              : 'border-[#E8E4DE] bg-white text-[#8a8f99] hover:bg-[#FAF8F4]'
           }`}
         >
           {o.label}
@@ -65,7 +65,7 @@ function ToggleGroup<T extends string>({
 }
 
 const inputCls =
-  'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-800 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200';
+  'w-full rounded-lg border border-[#E8E4DE] bg-white px-3 py-2 text-[#172033] focus:border-[#F1643A] focus:outline-none focus:ring-2 focus:ring-[#E8E4DE]';
 
 export default function StoreBuilder({ store, kind, onChange, onKindChange }: Props) {
   const vibeOpts = VIBE_OPTIONS.map((v) => ({ value: v, label: v }));
@@ -87,8 +87,8 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
             onClick={() => onKindChange(k)}
             className={`flex-1 rounded-xl border px-4 py-3 text-sm font-bold transition ${
               kind === k
-                ? 'border-amber-500 bg-amber-100 text-amber-800'
-                : 'border-stone-200 bg-white text-stone-500 hover:bg-stone-50'
+                ? 'border-[#F1643A] bg-[#F3EDE4] text-[#172033]'
+                : 'border-[#E8E4DE] bg-white text-[#8a8f99] hover:bg-[#FAF8F4]'
             }`}
           >
             {label}
@@ -170,8 +170,8 @@ export default function StoreBuilder({ store, kind, onChange, onKindChange }: Pr
             onSelect={(v) => onChange({ language: v })}
           />
         </Labeled>
-        <div className="text-sm text-stone-500">
-          길이 <span className="font-semibold text-stone-700">15초</span> (로고송에 딱 좋아요)
+        <div className="text-sm text-[#8a8f99]">
+          길이 <span className="font-semibold text-[#172033]">15초</span> (로고송에 딱 좋아요)
         </div>
       </div>
     </div>

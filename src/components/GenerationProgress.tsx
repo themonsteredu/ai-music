@@ -24,19 +24,19 @@ export default function GenerationProgress({ track: initial }: Props) {
   const busy = status === 'queued' || status === 'running';
 
   return (
-    <div className="rounded-2xl border border-amber-200 bg-white p-5">
+    <div className="rounded-2xl border border-[#E8E4DE] bg-white p-5">
       <div className="flex items-center gap-3">
         {busy && (
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-amber-300 border-t-amber-600" />
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#E8E4DE] border-t-[#F1643A]" />
         )}
-        <span className="font-bold text-stone-800">
+        <span className="font-bold text-[#172033]">
           {STATUS_LABEL[status] ?? status}
         </span>
       </div>
 
       {busy && (
-        <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-amber-100">
-          <div className="h-full w-1/2 animate-pulse rounded-full bg-amber-500" />
+        <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#F3EDE4]">
+          <div className="h-full w-1/2 animate-pulse rounded-full bg-[#F1643A]" />
         </div>
       )}
 
@@ -51,13 +51,13 @@ export default function GenerationProgress({ track: initial }: Props) {
             <a
               href={track.fileUrl}
               download={`${track.title ?? 'logo-song'}.${track.mimeType?.includes('wav') ? 'wav' : 'mp3'}`}
-              className="rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-200"
+              className="rounded-full bg-[#F3EDE4] px-4 py-2 text-sm font-semibold text-[#172033] hover:bg-[#E8E4DE]"
             >
               ⬇️ 다운로드
             </a>
             <Link
               href="/gallery"
-              className="rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+              className="rounded-full bg-[#F1643A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#e0562e]"
             >
               반 갤러리에서 보기 →
             </Link>

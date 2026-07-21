@@ -15,35 +15,35 @@ interface Props {
 export default function PromptGuide({ built, editedPrompt, onEditPrompt }: Props) {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-        <h3 className="text-sm font-bold text-amber-800">
+      <div className="rounded-2xl border border-[#E8E4DE] bg-[#FAF8F4] p-4">
+        <h3 className="text-sm font-bold text-[#172033]">
           💡 좋은 프롬프트는 이렇게 조합해요
         </h3>
         <ul className="mt-3 space-y-2">
           {built.segments.map((s, i) => (
             <li key={i} className="flex flex-col gap-0.5 rounded-lg bg-white p-3 sm:flex-row sm:items-baseline sm:gap-3">
-              <span className="shrink-0 rounded-md bg-amber-200 px-2 py-0.5 text-xs font-bold text-amber-900">
+              <span className="shrink-0 rounded-md bg-[#E8E4DE] px-2 py-0.5 text-xs font-bold text-[#172033]">
                 {s.label}
               </span>
-              <span className="font-semibold text-stone-800">
-                {s.value || <em className="text-stone-400">아직 안 적음</em>}
+              <span className="font-semibold text-[#172033]">
+                {s.value || <em className="text-[#a8aab0]">아직 안 적음</em>}
               </span>
-              <span className="text-sm text-stone-500 sm:ml-auto">{s.tip}</span>
+              <span className="text-sm text-[#8a8f99] sm:ml-auto">{s.tip}</span>
             </li>
           ))}
         </ul>
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-stone-700">
+        <label className="block text-sm font-semibold text-[#172033]">
           ✍️ 완성된 프롬프트 (직접 고쳐도 돼요)
         </label>
         <textarea
-          className="mt-1 min-h-28 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-800 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          className="mt-1 min-h-28 w-full rounded-lg border border-[#E8E4DE] bg-white px-3 py-2 text-[#172033] focus:border-[#F1643A] focus:outline-none focus:ring-2 focus:ring-[#E8E4DE]"
           value={editedPrompt}
           onChange={(e) => onEditPrompt(e.target.value)}
         />
-        <p className="mt-1 text-xs text-stone-400">
+        <p className="mt-1 text-xs text-[#a8aab0]">
           위 표의 요소들이 이 문장으로 합쳐졌어요. 마음에 안 들면 자유롭게 바꿔
           보세요.
         </p>
