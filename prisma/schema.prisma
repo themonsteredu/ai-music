@@ -10,6 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// 날짜별 API 요금/사용량 기록 (설정 페이지에서 집계)
+model UsageEvent {
+  id         String   @id @default(cuid())
+  day        String // YYYY-MM-DD (날짜별 집계용)
+  providerId String
+  seconds    Int // 생성한 오디오 길이(초)
+  costUsd    Float // 예상 요금(USD). 무료 경로는 0
+  createdAt  DateTime @default(now())
+
+  @@index([day])
+}
+
 model Track {
   id            String   @id @default(cuid())
   studentName   String? // 로그인 대신 표시용 이름 (PII 최소화)

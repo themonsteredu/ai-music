@@ -1,8 +1,14 @@
 import 'server-only';
 import { prisma } from '@/lib/db';
 import { getStorage } from '@/lib/storage';
+import { recordUsage } from '@/lib/usage';
 import type { GenerationJob, MusicProvider } from '@/lib/providers/types';
 import type { Track } from '@prisma/client';
+
+/** 트랙 길이(초) 추정: durationSec 없으면 종류별 기본값 */
+function trackSeconds(track: Track): number {
+  return track.durationSec ?? (track.kind === 'bgm' ? 60 : 15);
+}
 
 /**
  * job 상태를 받아 Track 을 갱신한다.
@@ -40,6 +46,7 @@ export async function advanceTrack(
           const res = await fetch(result.audioUrl);
           const buf = Buffer.from(await res.arrayBuffer());
           const { url } = await getStorage().save(track.id, buf, result.mimeType);
+          await recordUsage(provider.id, trackSeconds(track));
           return prisma.track.update({
             where: { id: track.id },
             data: { status: 'ready', fileUrl: url, mimeType: result.mimeType, providerJobId: job.providerJobId },
@@ -48,6 +55,7 @@ export async function advanceTrack(
         throw new Error('오디오 데이터가 비어 있습니다.');
       }
       const { url } = await getStorage().save(track.id, bytes, result.mimeType);
+      await recordUsage(provider.id, trackSeconds(track));
       return prisma.track.update({
         where: { id: track.id },
         data: { status: 'ready', fileUrl: url, mimeType: result.mimeType, providerJobId: job.providerJobId },

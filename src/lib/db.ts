@@ -56,6 +56,16 @@ async function ensureSchema(): Promise<void> {
       "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
   `);
+  await prisma.$executeRawUnsafe(`
+    CREATE TABLE IF NOT EXISTS "UsageEvent" (
+      "id" TEXT PRIMARY KEY,
+      "day" TEXT NOT NULL,
+      "providerId" TEXT NOT NULL,
+      "seconds" INTEGER NOT NULL,
+      "costUsd" REAL NOT NULL,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
 }
 
 export const dbReady: Promise<void> =

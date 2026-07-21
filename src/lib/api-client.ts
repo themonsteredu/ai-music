@@ -62,6 +62,24 @@ export function startGeneration(
   });
 }
 
+export interface UsageDay {
+  day: string;
+  count: number;
+  seconds: number;
+  costUsd: number;
+  costKrw: number;
+}
+export interface UsageSummary {
+  days: UsageDay[];
+  totalUsd: number;
+  totalKrw: number;
+  totalCount: number;
+}
+
+export function fetchUsage(): Promise<UsageSummary> {
+  return req<UsageSummary>(`/api/usage`);
+}
+
 export function importAudio(id: string, file: File): Promise<TrackDTO> {
   const form = new FormData();
   form.append('file', file);

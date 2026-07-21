@@ -1,5 +1,6 @@
 import { prisma, dbReady } from '@/lib/db';
 import { getStorage } from '@/lib/storage';
+import { recordUsage } from '@/lib/usage';
 import { ok, fail } from '@/lib/http';
 
 export const runtime = 'nodejs';
@@ -25,6 +26,9 @@ export async function POST(
   const mimeType = ALLOWED.includes(file.type) ? file.type : 'audio/mpeg';
   const bytes = Buffer.from(await file.arrayBuffer());
   const { url } = await getStorage().save(id, bytes, mimeType);
+
+  // 링크아웃(무료)은 요금 0으로 활동 로그에 기록
+  await recordUsage(track.providerId, track.durationSec ?? (track.kind === 'bgm' ? 60 : 15));
 
   const updated = await prisma.track.update({
     where: { id },
