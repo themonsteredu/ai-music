@@ -124,10 +124,11 @@ export function buildJinglePrompt(store: VirtualStore): BuiltPrompt {
           .filter(Boolean)
           .join(' ');
 
+  // Suno 커스텀 모드의 Lyrics 칸에 바로 넣을 수 있는 짧은 후렴 (학생이 고쳐 써도 됨)
   const lyrics =
     lang === 'ko'
-      ? `후렴에서 "${hook}"를 반복해서 부르는 짧고 신나는 로고송.`
-      : `A short catchy jingle whose chorus repeats the hook "${hook}".`;
+      ? `[후렴]\n${hook}, ${hook}\n${store.storeName} 여기 있어요\n${hook}, 함께 가요!`
+      : `[Chorus]\n${hook}, ${hook}\nCome on down to ${store.storeName}\n${hook}, let's go!`;
 
   return { prompt, lyrics, segments, kind: 'jingle' };
 }

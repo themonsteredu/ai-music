@@ -182,6 +182,7 @@ export default function CreatePage() {
               track={track}
               launchUrl={launchUrl}
               prompt={finalPrompt}
+              lyrics={built.lyrics}
             />
           ) : (
             <GenerationProgress key={track.id} track={track} />
